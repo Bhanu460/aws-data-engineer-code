@@ -1,0 +1,11 @@
+import pyodbc
+connection = pyodbc.connect('Driver={SQL Server};'
+                            'SERVER=DESKTOP-O6E9DM8;'
+                            'DATABASE=AdventureWorks_DWH;'
+                            'Trusted_ Connection=yes;')
+cursor=connection.cursor()
+cursor.execute("SELECT TOP (1000) [CurrencySkey],[CurrencyCodeSourceID],[CurrencyName],[InsertDate],[Modifieddate]FROM [AdventureWorks_DWH].[dbo].[DW.DimCurrency]")
+for row in cursor: 
+    print(row)
+cursor.close()
+connection.close() 
