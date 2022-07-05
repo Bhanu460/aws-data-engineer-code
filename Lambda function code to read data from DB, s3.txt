@@ -1,0 +1,82 @@
+=============================================read data from database===========================================
+import json
+import boto3
+import time
+
+def lambda_handler(event,context):
+    client = boto3.client('athena')
+    
+    queryStart = client.start_query_execution(
+            QueryString = 'select * from dim_product limit 10',
+            QueryExecutionContext={
+                'Database': 'workflow db'
+            },
+            ResultConfiguration = {
+                'OutputLocation' : 's3://advworksbv/dim currency/'
+            }
+        )
+    queryId = queryStart['QueryExecutionId']
+    time.sleep(15)
+    results = client.get_query_results(QueryExecutionId = queryId)
+        
+    for row in results['ResultSet']['Rows']:
+        print(row)
+
+===============================================to read data from s3==============================================
+import json
+import boto3
+
+s3 = boto3.resource('s3')
+
+def lambda_handler(event, context):
+  bucket =  'external-datalake-files'
+  key = 'product.json'
+
+  obj = s3.Object(bucket, key)
+  data = obj.get()['Body'].read().decode('utf-8')
+  json_data = json.loads(data)
+
+  print(json_data)
+
+===============================================to get and read data from s3,database==============================
+import json
+import boto3
+import time
+
+
+client = boto3.client('s3')
+
+def lambda_handler(event, context):
+    response = client.get_object(
+        Bucket='external-datalake-files',
+        Key='product.json',
+    )
+    data = response['Body'].read().decode('utf-8')
+  
+
+client = boto3.client('athena')
+
+def lambda_handler(event,context):
+    
+    responce = client.start_query_execution(
+            QueryString = 'select * from dim_product limit 10',
+            QueryExecutionContext={
+                'Database': 'workflow db'
+            },
+            ResultConfiguration = {
+                'OutputLocation' : 's3://advworksbv/dim currency/'
+            }
+        )
+    queryExecutionId = responce['QueryExecutionId']
+    time.sleep(15)
+    results = client.get_query_results(QueryExecutionId = queryExecutionId)
+        
+    for row in results['ResultSet']['Rows']:
+        print(row)
+        return responce
+        return
+    print (data)
+    return json.loads(data)
+    return responce
+    return
+
