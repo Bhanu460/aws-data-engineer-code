@@ -1,0 +1,15 @@
+datasource0 = datasource0.resolveChoice(specs = [('SalesTerritoryImage','cast:string')])
+
+
+datasource0 = ResolveChoice.apply(datasource0, specs = [("SalesTerritoryImage", "make_struct")])
+
+datasource0 = ResolveChoice.apply(datasource0, specs = [("reorderpoint", "cast:int"), ("safetystocklevel", "cast:int") ])
+
+
+df = dropnullfields3.toDF().show() 
+
+======================================to print count of rows and schema======================================
+df = dropnullfields3.toDF()
+print(df.count())
+df.show()
+df.printSchema()
