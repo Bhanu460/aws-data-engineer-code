@@ -1,0 +1,55 @@
+==============================================custom policy==============================================
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::mig-s3-bucket-from-kims",
+                "arn:aws:s3:::mig-s3-bucket-from-kims/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:PutObject",
+                "s3:PutObjectAcl"
+            ],
+            "Resource": [
+                "arn:aws:s3:::sana111",
+                "arn:aws:s3:::sana111/*"
+            ]
+        }
+    ]
+}
+
+================================================bucket policy s3=================================================
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "DelegateS3Access",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::907731427768:root"
+            },
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::mig-s3-bucket-from-kims/*",
+                "arn:aws:s3:::mig-s3-bucket-from-kims"
+            ]
+        }
+    ]
+}
+
+===================================================copy between two buckets cli command=========================
+
+aws s3 sync s3://mig-s3-bucket-from-kims s3://sana111 --source-region ap-south-1 --region ap-south-1
