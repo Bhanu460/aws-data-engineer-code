@@ -36,7 +36,7 @@
             "Sid": "DelegateS3Access",
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::907731427768:root"
+                "AWS": "arn:aws:iam::005920733197:root"
             },
             "Action": [
                 "s3:ListBucket",
@@ -52,4 +52,10 @@
 
 ===================================================copy between two buckets cli command=========================
 
-aws s3 sync s3://mig-s3-bucket-from-kims s3://sana111 --source-region ap-south-1 --region ap-south-1
+aws s3 sync s3://humanreview-a2i s3://humanreview-a2i-bak --source-region ap-south-1 --region ap-south-1
+
+
+
+
+
+005920733197
