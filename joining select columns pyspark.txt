@@ -1,0 +1,65 @@
+----------------------------------------------------------reading data from data set 1----------------------------------------------------------
+
+import pyspark
+from pyspark.sql import SparkSession
+from pyspark.sql.types import *
+from pyspark.sql.functions import *
+spark = SparkSession.builder.appName('Perform Joins on DataFrames').getOrCreate()
+SWID = StructField("SWID",IntegerType(),True)
+BIRTH_DT = StructField("BIRTH_DT",StringType(),True)
+GENDER_CD = StructField("GENDER_CD",StringType(),True)
+
+columnList = [SWID,BIRTH_DT,GENDER_CD]
+AuthorsDfSchema = StructType(columnList)
+print(AuthorsDfSchema)
+usersDf = spark.read.csv('regusers.csv', header=True)
+usersDf.show()
+-----------------------------------------------------reading data from data set 2----------------------------------------------------------------
+
+df = spark.read.csv('11.csv', header=True)
+df2 = df.select(df.columns[:14])
+df2.show()
+print(df2.count())
+-----------------------------------------------------reading data from data set 3----------------------------------------------------------------
+url = StructField("url",StringType(),True)
+category = StructField("category",StringType(),True)
+
+columnList1 = [url,category]
+AuthorsDfSchema1 = StructType(columnList1)
+print(AuthorsDfSchema1)
+productdf = spark.read.csv('products.csv', header=True)
+productdf.show()
+productdf.count()
+
+-----------------------------------------------------joining dataframes--------------------------------------------------------------------------
+df4 = spark.sql("select ID,TIMESTAMP,url,swid from df2" + \
+    "where df2.swid == concat('{', df2.swid , '}') ")
+
+
+df3 = productdf.join(df2,productdf.url ==  df2.url,"right") \
+     .show(truncate=False)
+
+
+
+-----------------------------------------------------pyspark.sql join---------------------------------------------------------------------------
+import pandas
+import pyspark
+from pyspark.sql import SparkSession
+from pyspark.sql.types import *
+from pyspark.sql.functions import *
+spark = SparkSession.builder.appName('joins').getOrCreate()
+df1 = spark.read.option("header",True).csv("11.csv")
+df2 = spark.read.option("header",True).csv("regusers.csv")
+df3 = spark.read.option("header",True).csv("products.csv")
+df1.createOrReplaceTempView("newdf1")
+df3.createOrReplaceTempView("newdf3")
+df2.createOrReplaceTempView("newdf2")
+
+df = spark.sql("select timestamp,ip,u.SWID,ur.url,ur.category from newdf1 n,newdf3 ur,newdf2 u " + \
+    "where n.url == ur.url and n.SWID == concat('{', u.SWID , '}') ")
+df.show()
+df.count()
+
+--------------------------------------------------to csv file----------------------------------------------------------------------------------
+import pandas as pd
+df.toPandas().to_csv('output.csv')
