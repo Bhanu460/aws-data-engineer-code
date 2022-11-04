@@ -1,0 +1,95 @@
+{
+    "videoId": {{random.number(500)}},
+    "likes": {{random.number(
+        {
+            "min":10,
+            "max":150
+        }
+    )}},
+    "Dislikes": {{random.number(
+        {
+            "min":10,
+            "max":150
+        }
+    )}},
+    "Viewer": "{{random.arrayElement(
+        ["NOT SUBSCRIBED","SUBSCRIBED"]
+    )}}"
+}
+
+
+
+
+
+
+=====================================================================================
+
+
+
+{
+    "Videoid": {{random.number(500)}},
+    "viewcount": {{random.number(
+        {
+            "min":0,
+            "max":1000000
+        }
+    )}},
+    "IsSubscribed": "{{random.arrayElement(
+        ["YES","NO"]
+    )}}",
+    "LikesCount": {{random.number(
+        {
+            "min":0,
+            "max":100000
+        }
+    )}},
+    "DisLikes": {{random.number(
+        {
+            "min":10,
+            "max":100000
+        }
+    )}},
+    "PlayBackStartup": {{random.number(
+        {
+            "min":10,
+            "max":1500
+        }
+    )}},
+    "VideoPlayback": {{random.number(
+	{
+	    "min":0,
+	    "max":5000
+	}
+    )}},
+
+    "AverageViewPercentage": {{random.number(
+	{
+	    "min":5,
+	    "max":100
+	}
+    )}},
+    "AverageWatchTime": {{random.number(
+	{
+	    "min":5,
+	    "max":60
+	}
+    )}},
+    "Watchtime": {{random.number(
+	{
+	    "min":5,
+	    "max":60
+	}
+    )}},
+    "Subscribers": {{random.number(
+	{
+	    "min":0,
+	    "max":100000
+	}
+    )}},
+    "Device": "{{random.arrayElement(
+        ["Mobile","Desktop","Tv"]
+    )}}",
+    "Month": "{{random.arrayElement(
+        ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+    )}}"
+}
