@@ -1,0 +1,34 @@
+------------------------------------------------importing API----------------------------------------------------
+
+import requests
+import pandas as pd
+import pyodbc
+
+data = requests.get('https://data.snb.ch/api/cube/frfidodge/data/csv/en').text
+
+#print(data.split("Date")[2])
+
+with open("text.csv","w") as f:
+    k=f.write(data.split("Date")[2])
+
+
+
+df = pd.read_csv(r"text.csv", delimiter= ';')
+print(df)
+#print(len(df.columns))
+#df.columns = ["date","D0","D1","D2","D3","D4","Value"]
+#print(k)
+
+# saving the dataframe
+df.to_csv('APIresult.csv')
+---------------------------------------------making data and sending data to sql server---------------------------------------
+import pandas as pd
+import pyodbc
+import sqlalchemy as sa
+
+
+data = pd.read_csv (r'C:\Users\user\APIresult.csv') 
+df = pd.DataFrame(data)
+
+engines = sa.create_engine('mssql+pyodbc://DESKTOP-O6E9DM8/API?driver=SQL+Server+Native+Client+11.0', echo=True)
+df.to_sql("API_results", engines)
