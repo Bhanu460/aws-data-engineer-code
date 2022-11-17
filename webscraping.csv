@@ -1,0 +1,17 @@
+year,query,temprature,unit,desc,humidity,wind
+2019,hyderabad,29,°C,Haze,28%,11 km/h
+2013,mumbai,32,°C,Smoke,44%,14 km/h
+2020,varanasi,29,°C,Mostly sunny,36%,5 km/h
+1998,jaipur,27,°C,Haze,31%,14 km/h
+1997,vijayawada,31,°C,Haze,45%,8 km/h
+2022,vizag,29,°C,Haze,42%,13 km/h
+2014,Beijing,10,°C,Clear with periodic clouds,45%,3 km/h
+2009,tokyo,14,°C,Clear,55%,3 km/h
+2004,kammam,31,°C,Sunny,36%,6 km/h
+2001,kanpur,29,°C,Sunny,45%,8 km/h
+1999,kabul,11,°C,Sunny,34%,6 km/h
+2016,Moscow,-3,°C,Mostly sunny,74%,11 km/h
+2017,Kiev,5,°C,Cloudy,92%,10 km/h
+2021,Warsaw,5,°C,Cloudy,97%,13 km/h
+2015,london,9,°C,Mostly cloudy,93%,8 km/h
+2023,Washington,4,°C,Cloudy,94%,13 km/h
