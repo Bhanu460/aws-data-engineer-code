@@ -1,0 +1,28 @@
+import pandas as pd
+csv1 = pd.read_csv("CRM MAIN.csv")
+csv1.head()
+csv2 = pd.read_csv("masterdata.csv")
+csv2.head()
+merged_data = csv1.merge(csv2,on=["client_id"])
+print(merged_data)
+merged_data.to_csv('file1.csv')
+csv3 = pd.read_csv("file1.csv")
+print(csv3)
+csv4 =csv3 .drop(csv3.columns[[0,9,11]], axis=1) 
+print(csv4)
+csv4.to_csv('file2.csv')
+csv5 = pd.read_csv("panaadhar.csv")
+merged_data12 = csv4.merge(csv5,on=["client_id"])
+print(merged_data12)
+merged_data12.to_csv('pan.csv')
+csv6 = pd.read_csv("pan.csv")
+csv7 =csv6 .drop(csv6.columns[[0,16]], axis=1) 
+print(csv7)
+csv7.to_csv('pan1.csv')
+print(csv7)
+csv7.to_csv('pan1.csv')
+
+
+
+result = pd.concat([ba1, ba2], axis=1, join='inner')
+display(result)
